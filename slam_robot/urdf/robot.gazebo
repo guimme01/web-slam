@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<robot>
+
+<gazebo reference="body_link">
+<mu1>0.2</mu1>
+<mu2>0.2</mu2>
+<material>Gazebo/DarkGrey</material>
+</gazebo>
+
+<gazebo reference="wheel1_link">
+<mu1>0.2</mu1>
+<mu2>0.2</mu2>
+<material>Gazebo/Turquoise</material>
+</gazebo>
+
+<gazebo reference="wheel2_link">
+<mu1>0.2</mu1>
+<mu2>0.2</mu2>
+<material>Gazebo/Turquoise</material>
+</gazebo>
+
+<gazebo reference="wheel3_link">
+<mu1>0.2</mu1>
+<mu2>0.2</mu2>
+<material>Gazebo/Turquoise</material>
+</gazebo>
+
+<gazebo reference="wheel4_link">
+<mu1>0.2</mu1>
+<mu2>0.2</mu2>
+<material>Gazebo/Turquoise</material>
+</gazebo>
+
+
+<gazebo reference="laser_frame">
+	<sensor name="laser" type="ray">
+		<pose>0 0 0 0 0 0</pose>
+		<visualize>true</visualize>
+		<update_rate>10</update_rate>
+		<ray>
+			<scan>
+				<horizontal>
+					<samples>360</samples>
+					<resolution>1</resolution>
+					<min_angle>-3.14</min_angle>
+					<max_angle>3.14</max_angle>
+				</horizontal>
+			</scan>
+			<range>
+				<min>0.3</min>
+				<max>12</max>
+			</range>
+		</ray>
+		<plugin name="laser_controller" filename="libgazebo_ros_laser.so">
+			<topicName>/scan</topicName>
+        <frameName>laser_frame</frameName>
+		</plugin>
+	</sensor>
+</gazebo>
+
+<gazebo reference="camera_link">
+    <sensor name="camera_sensor" type="camera">
+    	<update_rate>30.0</update_rate>
+      	<camera name="head">
+        	<horizontal_fov>1.3962634</horizontal_fov>
+        	<image>
+          		<width>800</width>
+          		<height>800</height>
+          		<format>R8G8B8</format>
+        	</image>
+        	<clip>
+          		<near>0.02</near>
+          		<far>300</far>
+        	</clip>
+        	<noise>
+          		<type>gaussian</type>
+          		<mean>0.0</mean>
+          		<stddev>0.007</stddev>
+        	</noise>
+      </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+            <always_on>true</always_on>
+            <update_rate>30.0</update_rate>
+            <camera_name>camera</camera_name>
+			<imageTopicName>image_raw</imageTopicName>
+			<cameraInfoTopicName>camera_info</cameraInfoTopicName>
+			<frameName>camera_link</frameName>
+			<hackBaseline>0.07</hackBaseline>
+			<distortionK1>0.0</distortionK1>
+			<distortionK2>0.0</distortionK2>
+			<distortionK3>0.0</distortionK3>
+			<distortionT1>0.0</distortionT1>
+			<distortionT2>0.0</distortionT2>
+        </plugin>
+    </sensor>
+	<material>Gazebo/Black</material>
+</gazebo>
+
+<gazebo>
+	<plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+
+		<updateRate>100.0</updateRate>
+		<robotNamespace> </robotNamespace>
+		<leftFrontJoint>wheel4_joint</leftFrontJoint>
+		<rightFrontJoint>wheel3_joint</rightFrontJoint>
+		<leftRearJoint>wheel2_joint</leftRearJoint>
+		<rightRearJoint>wheel1_joint</rightRearJoint>
+		<wheelSeparation>${base_link_y_dim+wheel_link_length}</wheelSeparation>
+		<wheelDiameter>${2*wheel_link_radius}</wheelDiameter>
+
+		<torque>1000</torque>
+		
+		<commandTopic>cmd_vel</commandTopic>
+		<odometryTopic>odom</odometryTopic>
+		<odometryFrame>odom</odometryFrame>
+		<robotBaseFrame>base_link</robotBaseFrame>
+		<publishOdometryTF>true</publishOdometryTF>
+		<publishWheelTF>true</publishWheelTF>
+		<broadcastTF>true</broadcastTF>
+		<publishWheelJointState>true</publishWheelJointState>
+
+		<covariance_x>0.0001</covariance_x>
+		<covariance_y>0.0001</covariance_y>
+		<covariance_yaw>0.01</covariance_yaw>
+		
+	</plugin>
+
+</gazebo>
+
+</robot>

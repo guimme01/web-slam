@@ -1,0 +1,3 @@
+float32 distance
+string position
+int8 dangerous_level

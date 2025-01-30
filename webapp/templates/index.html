@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Control Interface</title>
+    <script src="https://cdn.jsdelivr.net/npm/roslib/build/roslib.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Controllo del Robot e Visualizzazione Mappa</h1>
+
+    <div id="camera-container">
+        <div id="video-container">
+            <h2>Camera Stream</h2>
+            <iframe src="http://localhost:8080/stream_viewer?topic=image_raw"
+                    width="720" height="720" frameborder="0"></iframe>
+        </div>
+
+        <div id="danger-level-indicator">
+            <span id="arrow" class="arrow">▶</span>
+        </div>
+
+        <div class="control-grid">
+            <button onclick="moveRobot('forward')">▲</button>
+            <button onclick="moveRobot('left')">◀</button>
+            <button onclick="moveRobot('right')">▶</button>
+            <button onclick="moveRobot('stop')">▼</button>
+        </div>
+        <div class="checkbox-container">
+            <label for="backward">Backward on:</label>
+            <input type="checkbox" id="backward">
+        </div>
+    </div>
+
+    <div id="map-container">
+        <canvas id="mapCanvas"></canvas>
+        <div id="map-controls">
+            <h2>Save Map</h2>
+            <label for="mapName">Nome della Mappa:</label>
+            <input type="text" id="mapName" placeholder="Inserisci nome mappa">
+            <button id="createMapButton" onclick="sendMapName()">Crea Mappa</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/eventemitter2"></script>
+    <script src="{{ url_for('static', filename='js/rosbridgeHandler.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mapDisplay.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/robotControl.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/map_saver.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/dangerLevelSubscriber.js') }}"></script>  <!-- External JS -->
+</body>
+</html>

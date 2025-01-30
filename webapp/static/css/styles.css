@@ -1,0 +1,182 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Camera and Controls */
+#camera-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#video-container iframe {
+    border: 5px solid #333;
+    border-radius: 10px;
+    width: 700px;
+    height: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.control-grid {
+    display: flex; /* Use flexbox for the control buttons */
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.control-grid button {
+    width: 80px;
+    height: 80px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-grid button:hover {
+    background-color: #0056b3;
+}
+
+.checkbox-container {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+label {
+    font-size: 16px;
+}
+
+#danger-level-indicator {
+    display: flex;
+    align-items: center;
+    width: 50px;
+    height: 150px;
+    margin-left: 20px;
+    border-radius: 5px;
+    background-color: green;
+}
+
+.arrow {
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+/* Buttons */
+button {
+    width: 100px;
+    height: 50px;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Map and Controls Layout */
+#map-container {
+    display: flex;
+    justify-content: space-between; /* Space the map and controls evenly */
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+#mapCanvas {
+    border: 5px solid #333;
+    background-color: #fff;
+    width: 384px;
+    height: 384px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#map-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 300px;
+}
+
+#map-controls h2 {
+    margin-bottom: 10px;
+}
+
+#map-controls input {
+    width: 90%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#map-controls button {
+    width: 100px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    #video-container iframe {
+        width: 100%;
+        height: auto;
+    }
+
+    #map-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #map-controls {
+        width: 90%;
+    }
+
+    button {
+        width: 80px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    #mapCanvas {
+        width: 300px;
+        height: 300px;
+    }
+
+    button {
+        width: 70px;
+        height: 35px;
+        font-size: 14px;
+    }
+}
